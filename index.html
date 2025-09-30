@@ -1,97 +1,161 @@
-<!DOCTYPE circleButton>
-<circleButton>
+<!DOCTYPE html>
+<!-- Declares the document as HTML5. This is essential for using modern web standards. -->
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Configures the viewport to match the device's width. This is required for responsive design, 
+making the webpage adapt to different screen sizes, including mobile. -->
 
 <head>
     <title>AirSim</title>
+    <!-- Sets the title of the webpage. This text appears on the browser tab and helps users identify the page. -->
+
     <link rel="stylesheet" href="styles.css">
+    <!-- Links an external CSS file named "styles.css". -->
 </head>
 
-<body>
+<body> <!-- Marks the beginning of the body, where all visible content on the webpage resides. -->
 
-<button class="button" onclick="setupScene(1)">Wind Tunnel</button>
-<button class="button" onclick="setupScene(3)">Hires Tunnel</button>
-<!--<button class="button" onclick="setupScene(0)">Tank</button>-->
-<button class="button" onclick="setupScene(2)">Paint</button>
-
-<label class="checkbox-container">
-<input type = "checkbox" id = "streamButton" onclick = "scene.showStreamlines = !scene.showStreamlines">
-<label for="streamButton">Streamlines</label>
-</label>
-
-<label class="checkbox-container">
-<input type = "checkbox" id = "streamModeButton" onclick = 
-"streamModes.numOfXSection = streamModes.numOfXSection == 5 ? f.numX-1 : 5;
- streamModes.numSections = streamModes.numSections == 1000 ? 10 : 1000; 
- streamModes.repeats = streamModes.repeats == 3 ? 5 :3">
-<label for="streamModeButton">StreamMode</label>
-</label>
-
-<!--<input type = "checkbox" id = "velocityButton" onclick = "scene.showVelocities = !scene.showVelocities">
-<label for="velocityButton">Velocity</label> -->
-
-<label class="checkbox-container">
-<input type = "checkbox" name = "field" id = "pressureButton" onclick = "scene.showPressure = !scene.showPressure;"> 
-<label for="pressureButton">Pressure</label>
-</label>
-
-<label class="checkbox-container">
-<input type = "checkbox" name = "field" id = "smokeButton" onclick = "scene.showSmoke = !scene.showSmoke;" checked>
-<label for="smokeButton">Smoke</label>
-</label>
-
-<!--<input type = "checkbox" id = "overrelaxButton" onclick = "scene.overRelaxation = scene.overRelaxation == 1.0 ? 1.9 : 1.0" checked>
-<label for="overrelaxButton">Overrelax</label>-->
-
-<label class="checkbox-container">
-<input type = "radio" onchange="setObstacle(globalX, globalY, false)" id = "circleButton" name="shape" onclick = "scene.circle = true, scene.square = false, scene.rainDrop = false, scene.aeroFoil = false" checked>
-<label for="circleButton">Circle</label>
-</label>
-
-<label class="checkbox-container">
-<input type = "radio" onchange="setObstacle(globalX, globalY, false)" id = "squareButton" name="shape" onclick = "scene.square = true, scene.rainDrop = false, scene.aeroFoil = false, scene.circle = false">
-<label for="squareButton">Square</label>
-</label>
-
-<label class="checkbox-container">
-<input type = "radio" onchange="setObstacle(globalX, globalY, false)" id = "rainDropButton" name="shape" onclick = "scene.rainDrop = true, scene.square = false, scene.aeroFoil = false, scene.circle = false">
-<label for="rainDropButton">Rain Drop</label>
-</label>
-
-<label class="checkbox-container">
-<input type = "radio" onchange="setObstacle(globalX, globalY, false)" id = "toggleSlider"  name="shape" onclick = "scene.aeroFoil = true, scene.square = false, scene.rainDrop = false, scene.circle = false">
-<label for= "toggleSlider">Aerofoil</label>
-</label>
-
+<!-- Button for opening or displaying the control panel -->
 <button class="button" onclick="controlBox()">Controls</button>
+<!-- The `onclick` attribute calls the `controlBox()` JavaScript function when the button is clicked. -->
+<!-- Buttons to switch between predefined simulation scenes -->
+<button class="button" onclick="setupScene(1)">Wind Tunnel</button>
+<!-- Calls the `setupScene(1)` function to load the Wind Tunnel simulation. -->
+<button class="button" onclick="setupScene(3)">Pressure Tunnel</button>
+<!-- Calls the `setupScene(3)` function to load the Pressure Tunnel simulation. -->
+<button class="button" onclick="setupScene(2)">Paint</button>
+<!-- Calls the `setupScene(2)` function to load the Paint simulation. -->
+<button class="button" onclick="setupScene(0)">Tank</button>
+<!-- Calls the `setupScene(0)` function to load the Tank simulation. -->
 
-
+<!-- Checkbox to toggle visibility of streamlines in the simulation -->
 <label class="checkbox-container">
-<label for="speedRange">Velocity: <span id="velOutout"></span></label>
-<input type="range" min="5" max="100" value="20" class="slider" id="speedRange">
+    <input type="checkbox" id="streamButton" onclick="scene.showStreamlines = !scene.showStreamlines">
+    <!-- Toggles the `showStreamlines` property of the simulation scene.
+    If true, streamlines will appear; if false, they will be hidden. -->
+    <label for="streamButton">Streamlines</label>
+    <!-- Label associated with the checkbox for better UX and accessibility. -->
+</label>
+
+<!-- Checkbox to toggle between two smoke modes with varying settings -->
+<label class="checkbox-container">
+    <input type="checkbox" id="smokeModeButton" 
+        onclick="scene.smokeMode = !scene.smokeMode;" onchange="setupScene(1)">
+    <label for="smokeModeButton">SmokeMode</label>
+</label>
+
+<!-- Checkbox to toggle the pressure field display -->
+<label class="checkbox-container">
+    <input type="checkbox" name="field" id="pressureButton" onclick="scene.showPressure = !scene.showPressure;">
+    <!-- Toggles the `showPressure` property to control visibility of the pressure field. -->
+    <label for="pressureButton">Pressure</label>
+</label>
+
+<!-- Checkbox to toggle the smoke visualization -->
+<label class="checkbox-container">
+    <input type="checkbox" name="field" id="smokeButton" onclick="scene.showSmoke = !scene.showSmoke;" checked>
+    <!-- Toggles the `showSmoke` property to control smoke visualization. This checkbox is checked by default. -->
+    <label for="smokeButton">Smoke</label>
 </label>
 
 <label class="checkbox-container">
-<label for="resolution">Resolution</label>   
-<input type="text" onchange="checkRes(value)" id = "resolution" value = "100">
+    <input type="checkbox" name="field" id="drawButton" onclick="scene.draw = !scene.draw;">
+    <!-- Toggles the drawing mode allowing the user to draw using the circle. -->
+    <label for="drawButton">Draw Mode</label>
 </label>
 
 
 <label class="checkbox-container">
-<input type="range" onchange="setObstacle(globalX, globalY, false)" min="-20" max="20" value="0" class="slider" id="angle">
-<label for="angle">Angle: <span id="sliderAngle"></span></label>
+<label for="shapeSelect">Shape</label>
+<!-- Label for accessibility, linked to the dropdown menu -->
+<select id="shapeSelect" onchange="selectShape(this.value)">
+    <!-- Dropdown menu for shape selection -->
+    <option value="circle">Circle</option>
+    <option value="square">Square</option>
+    <option value="raindrop">Rain Drop</option>
+    <option value="aerofoil">Aerofoil</option>
+</select>
+</label>
+<script>
+    // JavaScript function to handle shape selection from the dropdown
+    function selectShape(shape) {
+        // Reseting all shapes to false
+        scene.circle = false;
+        scene.square = false;
+        scene.rainDrop = false;
+        scene.aeroFoil = false;
+        // Setting the selected shape to true
+        switch (shape) {
+            case "circle":
+                scene.circle = true; break;
+            case "square":
+                scene.square = true; break;
+            case "raindrop":
+                scene.rainDrop = true; break;
+            case "aerofoil":
+                scene.aeroFoil = true; break;
+        }
+        // Call any necessary function to update the obstacle
+        setObstacle(globalX, globalY, false);
+    }
+</script>
+
+<!-- Text input to adjust simulation resolution -->
+<label class="checkbox-container">
+    <label for="resolution">Resolution</label>
+    <input type="text" id="resolution" value="100" onchange="checkRes(value)">
+    <!-- Calls `checkRes(value)` to validate and apply the resolution entered by the user. -->
+</label>
+
+<!-- Slider to control velocity of the simulation -->
+<label class="checkbox-container">
+    <input type="range" min="5" max="100" value="20" class="slider" id="speedRange">
+    <!-- Allows the user to adjust velocity between 5 and 100, with the default set to 20. -->
+    <label for="speedRange">Velocity: <span id="velOutout"></span>%</label>
+    <!-- Label showing the current velocity value. -->
+</label>
+
+<!-- Slider to set the angle of the obstacle -->
+<label class="checkbox-container">
+    <input type="range" id="angle" min="-20" max="20" value="0" class="slider" onchange="setObstacle(globalX, globalY, false)">
+    <!-- Allows the user to adjust the angle of the obstacle between -20 and 20 degrees. -->
+    <label for="angle">Angle: <span id="sliderAngle"></span> °</label>
+    <!-- Label dynamically displays the current angle value. -->
+</label>
+
+<!-- Slider to set the curvature of an aerofoil -->
+<label class="checkbox-container">
+    <input type="range" id="K" min="0" max="100" value="50" class="slider" onchange="setObstacle(globalX, globalY, false)">
+    <!-- Allows the user to adjust the curvature between 0 and 100, with a default value of 50. -->
+    <label for="K">Aerofoil Curve: <span id="k"></span></label>
+    <!-- Label dynamically displays the current curvature value of the aerofoil. -->
 </label>
 
 <label class="checkbox-container">
-<label for="K">Aerofoil Curve: <span id="k"></span></label>
-<input type="range" onchange="setObstacle(globalX, globalY, false)" min="0" max="100" value="50" class="slider" id="K">
+    <input type="range" id="shapeSize" min="1" max="30" value="15" class="slider" onchange="setObstacle(globalX, globalY, false)">
+    <!-- Allows the user to adjust the size of the obstacle between 3 and 30 units. -->
+    <label for="shapeSize">Shape Size: <span id="sliderShapeSize"></span></label>
+    <!-- Label dynamically change the sizr of the shape. -->
 </label>
 
+<!-- Button used to reset the divergence average-->
+<button class="smallButton" onclick="resetDiv()">Reset Average</button>
 
-
-<canvas id="myCanvas" style="border:2px solid"></canvas>
-
+<!-- Canvas element for rendering the simulation -->
+<canvas id="myCanvas" style="border:0.3vw solid #606060"></canvas>
+<!-- The canvas element is where all simulation visuals are drawn. 
+The border provides a visual boundary for the simulation area. -->
+<script>
+var canvas = document.getElementById("myCanvas");
+    var c = canvas.getContext("2d", { willReadFrequently: true });	
+    canvas.width = window.innerWidth - 30;
+    canvas.height = window.innerHeight - 100;
+    
+    canvas.focus();
+    var simHeight = 1;	
+    var cScale = canvas.height / simHeight;
+    var simWidth = (canvas.width / cScale);
+</script>
+<!-- External JavaScript file to manage all dynamic and interactive behaviors -->
 <script src="index.js"></script>
-
 </body>
-</circleButton>

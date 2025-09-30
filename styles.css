@@ -1,56 +1,91 @@
 body {
     font-family: verdana; 
-    font-size: 1vw;
+    /* Sets the font style to Verdana for all text within the body. */
+    font-size: 0.8vw;
+    /* Sets the font size to 1% of the viewport width, ensuring responsiveness. */
     background-color: #202020;
+    /* Sets the background color to a dark gray (#202020) for a modern, subtle look. */
+    overflow: hidden;
+    /* Prevents the page from scrolling vertically or horizontally. */
 }			
+
 .button {
     background-color: #606060;
-    
+    /* Sets the background color of buttons to a medium gray for a balanced contrast. */
     color: white;
-    padding: 1vh 1vw;
+    /* Makes the button text white for visibility against the gray background. */
+    padding: 0.5vh 0.5vw;
+    /* Adds vertical and horizontal padding (responsive to viewport dimensions). */
     font-size: 1.5vw;
+    /* Sets the font size to 1.5% of the viewport width for scalability. */
     margin: 4px 2px;
+    /* Adds a small margin around buttons to space them apart. */
     cursor: pointer;
+    /* Changes the cursor to a pointer when hovering over the button, indicating interactivity. */
     font-weight: bold;
+    /* Makes the button text bold for emphasis. */
 }
-label{
+.smallButton {
+    background-color: #606060;
+    /* Sets the background color of buttons to a medium gray for a balanced contrast. */
     color: white;
+    /* Makes the button text white for visibility against the gray background. */
+    padding: 1vh 0.5vw;
+    /* Adds vertical and horizontal padding (responsive to viewport dimensions). */
+    font-size: 1.1vw;
+    /* Sets the font size to 1.5% of the viewport width for scalability. */
+    margin: 4px 2px;
+    /* Adds a small margin around buttons to space them apart. */
+    cursor: pointer;
+    /* Changes the cursor to a pointer when hovering over the button, indicating interactivity. */
     font-weight: bold;
-}
-input[type = "range"]{
-    width: 5vw;
-    outline: 2px solid rgb(255, 255, 255);
-    outline-offset: 5px
+    /* Makes the button text bold for emphasis. */
+
 }
 
+label {
+    color: white;
+    /* Sets the text color of labels to white for contrast against a dark background. */
+    font-weight: bold;
+    /* Makes the label text bold for better readability. */
+}
+
+input[type="range"] {
+    width: 5vw;
+    /* Sets the width of range sliders to 5% of the viewport width for consistency. */
+    outline: 2px solid rgb(255, 255, 255);
+    /* Adds a white outline around the range slider for better visibility. */
+    outline-offset: 5px;
+    /* Adds spacing between the slider and its outline. */
+}
 
 .slider {
     -webkit-appearance: none;
+    /* Removes default styling for range sliders on WebKit browsers (e.g., Chrome, Safari). */
     width: 80px;
+    /* Sets a fixed width of 80px for the slider. */
     height: 6px;
+    /* Sets the height of the slider track to 6px. */
     border-radius: 5px;
+    /* Rounds the corners of the slider track slightly for a polished appearance. */
     background: #d3d3d3;
+    /* Sets a light gray background for the slider track. */
     outline: white;
+    /* Adds a white outline around the slider track. */
     opacity: 0.7;
+    /* Makes the slider slightly transparent for a sleek look. */
     -webkit-transition: .2s;
     transition: opacity .2s;
+    /* Smoothly transitions the opacity change over 0.2 seconds when the slider is interacted with. */
 }
 
 .checkbox-container {
     display: inline-block;
+    /* Allows the container to be placed inline with other elements while maintaining block-level properties. */
     padding: 0.5vw;
+    /* Adds padding inside the checkbox container, responsive to viewport width. */
     border: 0.3vw solid #606060;
-    border-radius: 0.1vw; 
-}
-input[type = "text"]{
-    width: 2.5vw;
-}
-input[type=checkbox]{
-  /* Double-sized Checkboxes */
-  -ms-transform: scale(1vw); /* IE */
-  -moz-transform: scale(1vw); /* FF */
-  -webkit-transform: scale(1vw); /* Safari and Chrome */
-  -o-transform: scale(1vw); /* Opera */
-  transform: scale(1vw);
-  padding: 10px;
+    /* Adds a solid gray border of 0.3vw thickness around the container. */
+    border-radius: 0.1vw;
+    /* Rounds the corners of the container slightly for a softer appearance. */
 }
